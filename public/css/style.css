@@ -102,7 +102,7 @@ a {
 .chat-messages {
 	padding: 30px;
 	margin: 0;
-	max-height: 500px;
+	height: 56vh;
 	overflow-y: scroll;
 }
 
@@ -240,7 +240,7 @@ a {
 	color: red;
 }
 
-/* Smart phones width */
+/* Smartphones width */
 @media (max-width: 700px){
 	body{
 		font-size: small;
