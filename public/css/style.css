@@ -32,10 +32,17 @@ a {
 .btn {
 	cursor: pointer;
 	padding: 5px 15px;
+	margin: 0;
 	background: var(--light-color);
-	color: var(--dark-color-a);
+	color: #1264D4;
 	border: 0;
-	font-size: 17px;
+	font-size: inherit;
+	opacity: 0.9;
+	transition: 0.3s;
+}
+
+.btn:hover{
+	opacity: 1;
 }
 
 /* Chat Page */
@@ -60,8 +67,8 @@ a {
 	margin: 0;
 }
 
-.chat-container .chat-header .btn.leave-room{
-	margin: 0;
+.btn.leave-room i{
+	font-size: 0;
 }
 
 .chat-main {
@@ -151,19 +158,10 @@ a {
 }
 
 .chat-form-container input[type='text'] {
-	font-size: 16px;
+	font-size: inherit;
 	padding: 5px;
 	height: 40px;
 	flex: 1;
-}
-
-.chat-form-container .btn{
-	transition: 0.3s;
-	opacity: 0.9;
-}
-
-.chat-form-container .btn:hover{
-	opacity: 1;
 }
 
 /* Join Page */
@@ -220,18 +218,30 @@ a {
 	width: 100%;
 }
 
-.join-main .btn{
-	transition: 0.3s;
-	opacity: 0.9;
-}
+/* Smart phones width */
+@media (max-width: 700px){
+	body{
+		font-size: small;
+	}
 
-.join-main .btn:hover{
-	opacity: 1;
-}
+	h1{
+		font-size: medium;
+	}
 
-@media (max-width: 700px) {
+	.btn.leave-room{
+		font-size: 0;
+	}
+
+	.btn.leave-room i{
+		font-size: initial;
+	}
+
 	.chat-main {
 		display: block;
+	}
+
+	.chat-main .chat-messages .message .meta{
+		font-size: inherit;
 	}
 
 	.chat-sidebar {
