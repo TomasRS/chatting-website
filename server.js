@@ -8,7 +8,7 @@ const { userJoin, getCurrentUserById, userLeaves, getRoomUsers } = require('./ut
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
-const botName = 'TomChat Bot';
+const botName = 'Chat Bot';
 
 // Set static folder
 app.use(express.static(path.join(__dirname, 'public')));
@@ -20,7 +20,7 @@ io.on('connection', socket => {
         socket.join(user.room);
 
         // Welcome current user
-        socket.emit('message', formatMessage(botName, 'Welcome to TomChat!'));
+        socket.emit('message', formatMessage(botName, `Welcome to the ${room} room!`));
 
         // Broadcast when a user connects
         socket.broadcast.to(user.room).emit('message', formatMessage(botName, `${user.name} has joined the chat`));
