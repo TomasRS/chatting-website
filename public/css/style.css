@@ -127,6 +127,10 @@ a {
 	color: #777;
 }
 
+.chat-messages .message .text.from-chatbot{
+	font-style: italic;
+}
+
 .chat-form-container {
 	padding: 20px 30px;
 	background-color: var(--dark-color-a);
