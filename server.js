@@ -1,8 +1,9 @@
 const path = require('path');
-const http =  require('http');
+const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
 const formatMessage = require('./utils/messages');
+const { userJoin, getCurrentUserById } = require('./utils/users');
 
 const app = express();
 const server = http.createServer(app);
@@ -14,22 +15,26 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Run when client connects
 io.on('connection', socket => {
+    socket.on('joinRoom', ({ username, room }) => {
+        const user = userJoin(socket.id, username, room);
+        socket.join(user.room);
 
-    // Welcome current user
-    socket.emit('message', formatMessage(botName,'Welcome to TomChat!'));
+        // Welcome current user
+        socket.emit('message', formatMessage(botName, 'Welcome to TomChat!'));
 
-    // Broadcast when a user connects
-    socket.broadcast.emit('message', formatMessage(botName, 'A user has joined the chat'));
-
-    // Run when client disconnects
-    socket.on('disconnect', () => {
-        // Broadcast when a user disconnects
-        io.emit('message', formatMessage(botName, 'A user has left the chat'));
+        // Broadcast when a user connects
+        socket.broadcast.to(user.room).emit('message', formatMessage(botName, `${user.name} has joined the chat`));
     });
 
     // Listen for a chat message
     socket.on('chatMessage', (message) => {
         io.emit('message', formatMessage('USER', message));
+    });
+
+    // Run when client disconnects
+    socket.on('disconnect', () => {
+        // Broadcast when a user disconnects
+        io.emit('message', formatMessage(botName, 'A user has left the chat'));
     });
 });
 
