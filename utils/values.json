@@ -1,0 +1,10 @@
+{
+    "chatBotName": "Chat Bot",
+    "timeFormat": "h:mm a",
+    "roomUsersEventName": "roomUsers",
+    "messageEventName": "message",
+    "connectionEventName": "connection",
+    "disconnectEventName": "disconnect",
+    "joinRoomEventName": "joinRoom",
+    "chatMessageEventName": "chatMessage"
+}
