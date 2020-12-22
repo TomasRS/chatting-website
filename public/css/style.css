@@ -89,12 +89,26 @@ a {
 	overflow-y: scroll;
 }
 
-.chat-messages .message {
+.chat-messages .message.left,
+.chat-messages .message.right {
 	padding: 10px;
 	margin-bottom: 15px;
 	background-color: var(--light-color);
 	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	display: block;
+	position: relative;
+	clear: both;
 	max-width: 90%;
+}
+
+.chat-messages .message.left{
+	margin-right: 20%;
+}
+
+.chat-messages .message.right{
+	margin-left: 20%;
 }
 
 .chat-messages .message .meta {
@@ -102,6 +116,7 @@ a {
 	font-weight: bold;
 	opacity: 0.7;
 	margin-bottom: 7px;
+	color: #0032fd;
 }
 
 .chat-messages .message .meta.from-chatbot{

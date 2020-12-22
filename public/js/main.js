@@ -46,6 +46,7 @@ chatForm.addEventListener('submit', (event) => {
 function outputMessage(message){
     const div = document.createElement('div');
     div.classList.add('message');
+    div.classList.add(message.isChatBot? 'right': 'left');
     div.innerHTML = `<p class="meta ${message.isChatBot? 'from-chatbot': ''}">${message.username}<span> - ${message.time}</span></p>
                     <p class="text">${message.text}</p>`;
 
