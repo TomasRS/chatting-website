@@ -2,10 +2,12 @@ const path = require('path');
 const http =  require('http');
 const express = require('express');
 const socketio = require('socket.io');
+const formatMessage = require('./utils/messages');
 
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
+const botName = 'TomChat Bot';
 
 // Set static folder
 app.use(express.static(path.join(__dirname, 'public')));
@@ -14,20 +16,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 io.on('connection', socket => {
 
     // Welcome current user
-    socket.emit('message', 'Welcome to TomChat!');
+    socket.emit('message', formatMessage(botName,'Welcome to TomChat!'));
 
     // Broadcast when a user connects
-    socket.broadcast.emit('message', 'A user has joined the chat');
+    socket.broadcast.emit('message', formatMessage(botName, 'A user has joined the chat'));
 
     // Run when client disconnects
     socket.on('disconnect', () => {
         // Broadcast when a user disconnects
-        io.emit('message', 'A user has left the chat');
+        io.emit('message', formatMessage(botName, 'A user has left the chat'));
     });
 
     // Listen for a chat message
     socket.on('chatMessage', (message) => {
-        io.emit('message', message);
+        io.emit('message', formatMessage('USER', message));
     });
 });
 
