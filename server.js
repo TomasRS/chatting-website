@@ -7,22 +7,27 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
-//Set static folder
+// Set static folder
 app.use(express.static(path.join(__dirname, 'public')));
 
-//Run when client connects
+// Run when client connects
 io.on('connection', socket => {
 
-    //Welcome current user
+    // Welcome current user
     socket.emit('message', 'Welcome to TomChat!');
 
-    //Broadcast when a user connects
+    // Broadcast when a user connects
     socket.broadcast.emit('message', 'A user has joined the chat');
 
-    //Run when client disconnects
+    // Run when client disconnects
     socket.on('disconnect', () => {
-        //Broadcast when a user disconnects
+        // Broadcast when a user disconnects
         io.emit('message', 'A user has left the chat');
+    });
+
+    // Listen for a chat message
+    socket.on('chatMessage', (message) => {
+        io.emit('message', message);
     });
 });
 
