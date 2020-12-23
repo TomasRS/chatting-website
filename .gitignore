@@ -1,6 +1,12 @@
 # Images not used
 public/chat-icon.png
 
+# Deployment files
+.deployment
+
+# VS Code folder
+.vscode
+
 # Logs
 logs
 *.log

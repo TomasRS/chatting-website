@@ -106,8 +106,8 @@ a {
 	overflow-y: scroll;
 }
 
-.chat-messages .message.left,
-.chat-messages .message.right {
+.chat-messages .message.other,
+.chat-messages .message.me {
 	padding: 10px;
 	margin-bottom: 15px;
 	background-color: var(--light-color);
@@ -117,15 +117,18 @@ a {
 	display: block;
 	position: relative;
 	clear: both;
-	max-width: 90%;
+	width: fit-content;
+	max-width: 80%;
 }
 
-.chat-messages .message.left{
-	margin-right: 20%;
+.chat-messages .message.other{
+	background-color: #f1f1f1;
+	float: left;
 }
 
-.chat-messages .message.right{
-	margin-left: 20%;
+.chat-messages .message.me{
+	background-color: #ddd8f6;
+	float: right;
 }
 
 .chat-messages .message .meta {
