@@ -17,37 +17,40 @@
 		<title>Chatting Website</title>
 	</head>
 	<body>
-		<div class="join-container">
-			<header class="join-header">
-				<h1>Welcome to Chatting Website</h1>
-			</header>
+		<div class="container">
+			<div class="join-container">
+				<header class="join-header">
+					<h1>Welcome to Chatting Website</h1>
+				</header>
+				<hr>
+				<main class="join-main">
+					<form action="chat.html" class="login-form">
+						<div class="form-control">
+							<label for="username">Username</label>
+							<input
+								type="text"
+								name="username"
+								id="username"
+								placeholder="Username"
+								required
+							/>
+						</div>
+						<div class="form-control">
+							<label for="room">Room</label>
+							<select name="room" id="room">
+								<option value="General">General</option>
+								<option value="Games">Games</option>
+								<option value="College">College</option>
+							</select>
+						</div>
+						<button type="submit" class="btn">Join Chat</button>
+					</form>
+				</main>
+			</div>
 			<hr>
-			<main class="join-main">
-				<form action="chat.html" class="login-form">
-					<div class="form-control">
-						<label for="username">Username</label>
-						<input
-							type="text"
-							name="username"
-							id="username"
-							placeholder="Username"
-							required
-						/>
-					</div>
-					<div class="form-control">
-						<label for="room">Room</label>
-						<select name="room" id="room">
-							<option value="General">General</option>
-							<option value="Games">Games</option>
-							<option value="College">College</option>
-						</select>
-					</div>
-					<button type="submit" class="btn">Join Chat</button>
-				</form>
-			</main>
+			<div class="footer">
+				Made with <span class="heart">❤</span> by <a href="https://www.tomasrs.dev" target="_blank">Tomas Rodriguez Saavedra</a>
+			</div>
 		</div>
-		<div class="footer">
-			Made with <span class="heart">❤</span> by <a href="https://www.tomasrs.dev" target="_blank">Tomas Rodriguez Saavedra</a>
-		  </div>
 	</body>
 </html>

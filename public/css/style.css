@@ -10,15 +10,18 @@
 
 * {
 	box-sizing: border-box;
-	margin: 0 auto;
+	margin: 0;
 	padding: 0;
 }
 
 body {
 	font-family: 'Monserrat', sans-serif;
 	font-size: 16px;
-	background: var(--light-color);
-	margin: 20px;
+	background-image: linear-gradient(to right, #7221CE, #1264D4);
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 ul {
@@ -27,6 +30,10 @@ ul {
 
 a {
 	text-decoration: none;
+}
+
+.container{
+	justify-content: center;
 }
 
 .btn {
@@ -49,7 +56,6 @@ a {
 
 .chat-container {
 	max-width: 1100px;
-	background: #fff;
 	margin: 30px auto;
 	overflow: hidden;
 }
@@ -104,6 +110,7 @@ a {
 	margin: 0;
 	height: 56vh;
 	overflow-y: scroll;
+	background-color: #ffffff;
 }
 
 .chat-messages .message.other,
@@ -177,12 +184,13 @@ a {
 .join-header {
 	text-align: center;
 	padding: 20px;
-	background-image: linear-gradient(to right, #7221CE, #1264D4);
 }
 
 .join-main {
 	padding: 30px 40px;
-	background-image: linear-gradient(to right, #7221CE, #1264D4);
+	display: flex;
+	justify-content: center;
+	text-align: center;
 }
 
 .join-main .login-form{
@@ -236,11 +244,15 @@ a {
     margin: 30px auto;
     overflow: hidden;
     text-align: center;
-    color: #1264D4;
+    color: #ffffff;
 }
 
 .footer .heart{
 	color: red;
+}
+
+.footer a{
+	color:#d3d3d3;
 }
 
 /* Smartphones width */
