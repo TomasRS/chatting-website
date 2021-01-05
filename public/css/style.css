@@ -120,6 +120,9 @@ a {
     padding: 5px;
 	width: -webkit-fill-available;
 	width: -moz-available;
+	border: 0;
+	border-radius: 0;
+	-moz-border-radius: 0;
 }
 
 .chat-sidebar ul{
@@ -281,29 +284,27 @@ a {
 
 .join-main .form-control input[type='text']{
 	font-size: inherit;
+	padding: 5px;
+	height: 40px;
+	width: 100%;
+	border: 0;
+	border-radius: 0;
+	-moz-border-radius: 0;
 }
 
 .join-main .form-control select{
 	font-size: inherit;
+	padding: 5px;
+	height: 40px;
+	width: 100%;
+	border: 0;
+	border-radius: 0;
+	-moz-border-radius: 0;
 }
 
 .join-main label {
 	display: block;
 	margin-bottom: 5px;
-}
-
-.join-main input[type='text'] {
-	font-size: 16px;
-	padding: 5px;
-	height: 40px;
-	width: 100%;
-}
-
-.join-main select {
-	font-size: 16px;
-	padding: 5px;
-	height: 40px;
-	width: 100%;
 }
 
 .join-main .btn {
@@ -335,15 +336,19 @@ a {
 		font-size: small;
 	}
 
+	.join-main .login-form{
+		width: 60%;
+	}
+
 	h1{
 		font-size: medium;
 	}
 
-	.join-main input[type='text']{
+	.join-main .form-control input[type='text']{
 		height: 30px;
 	}
 
-	.join-main select{
+	.join-main .form-control select{
 		height: 30px;
 	}
 
