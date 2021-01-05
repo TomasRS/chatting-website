@@ -92,10 +92,13 @@ a {
 }
 
 .chat-sidebar {
-	color: #fff;
+	color: rgb(53, 53, 53);
 	width: 12rem;
 	margin: 0;
 	overflow-y: scroll;
+	background-color: lightgrey;
+	padding: .5rem;
+	height: 56vh;
 }
 
 .chat-sidebar h2 {
@@ -106,11 +109,31 @@ a {
 }
 
 .chat-sidebar h3 {
-	margin-bottom: 15px;
+	margin-bottom: .5rem;
+    margin-top: .5rem;
+}
+
+.chat-sidebar input[type="text"]{
+	margin-top: .5rem;
+    margin-bottom: .5rem;
+	height: 40px;
+    padding: 5px;
+	width: -webkit-fill-available;
+	width: -moz-available;
+}
+
+.chat-sidebar ul{
+	margin-top: .5rem;
+	margin-bottom: .5rem;
 }
 
 .chat-sidebar ul li {
-	padding: 10px 0;
+	padding: 10px 5px 10px;
+	border-top: 1px solid grey;
+}
+
+.chat-sidebar ul li:hover{
+	background-color: #adadad;
 }
 
 .mobile-room-name{
@@ -310,7 +333,7 @@ a {
 	}
 
 	.mobile-room-name{
-		background: lightgray;
+		background: #d3d3d3;
     	display: flex;
     	align-items: center;
     	justify-content: center;
