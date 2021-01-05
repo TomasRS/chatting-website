@@ -57,7 +57,7 @@ a {
 
 .chat-container {
 	max-width: 1100px;
-	margin: 1rem auto;
+	margin: .5rem auto;
 	overflow: hidden;
 }
 
@@ -71,6 +71,15 @@ a {
 
 .chat-container .chat-header .app-title{
 	margin: 0;
+}
+
+.chat-container .chat-header .room-name-title{
+	display: flex;
+	align-items: center;
+}
+
+.chat-container .chat-header .room-name-title h2{
+	margin-left: .5rem;
 }
 
 .btn.leave-room i{
@@ -102,6 +111,10 @@ a {
 
 .chat-sidebar ul li {
 	padding: 10px 0;
+}
+
+.mobile-room-name{
+	display: none;
 }
 
 .chat-messages {
@@ -290,6 +303,23 @@ a {
 
 	.chat-main .chat-messages .message .meta{
 		font-size: inherit;
+	}
+
+	.chat-container .chat-header .room-name-title{
+		display: none;
+	}
+
+	.mobile-room-name{
+		background: lightgray;
+    	display: flex;
+    	align-items: center;
+    	justify-content: center;
+    	padding: .5rem;
+    	font-weight: bold;
+	}
+
+	.mobile-room-name div{
+		margin-left: .5rem;
 	}
 
 	.chat-sidebar {

@@ -1,6 +1,6 @@
 const chatForm = document.getElementById('chat-form');
 const chatMessages = document.querySelector('.chat-messages');
-const roomName = document.getElementById('room-name');
+const roomNameElements = document.getElementsByClassName('room-name');
 const roomUsers = document.getElementById('users');
 
 // Get username and room from URL query
@@ -55,7 +55,8 @@ function outputMessage(message){
 
 // Add room name to DOM
 function outputRoomName(room){
-    roomName.innerText = room;
+    roomNameElements[0].innerText = room;
+    roomNameElements[1].innerText = room;
 }
 
 // Add room users to DOM
