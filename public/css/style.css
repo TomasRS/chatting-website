@@ -163,19 +163,46 @@ a {
 	padding: 10px;
 	margin-bottom: 15px;
 	background-color: var(--light-color);
-	border-radius: 5px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
 	display: block;
 	position: relative;
 	clear: both;
 	width: fit-content;
 	max-width: 80%;
+	position: relative;
 }
 
 .chat-messages .message.other{
 	background-color: #f1f1f1;
 	float: left;
+}
+
+.chat-messages .message.other::before{
+	content: "";
+  	width: 0px;
+  	height: 0px;
+  	position: absolute;
+  	border-left: 10px solid transparent;
+  	border-right: 10px solid #f1f1f1;
+  	border-top: 10px solid #f1f1f1;
+  	border-bottom: 10px solid transparent;
+  	left: -10px;
+  	top: 0px;
+}
+
+.chat-messages .message.me::before{
+	content: "";
+	width: 0px;
+	height: 0px;
+	position: absolute;
+	border-left: 10px solid #d6f4d4;
+	border-right: 10px solid transparent;
+	border-top: 10px solid transparent;
+	border-bottom: 10px solid #d6f4d4;
+	right: -10px;
+	bottom: 0px;
 }
 
 .chat-messages .message.me{
@@ -218,6 +245,8 @@ a {
 	height: 40px;
 	flex: 1;
 	border: 0;
+	border-radius: 0;
+	-moz-border-radius: 0;
 }
 
 /* Join Page */
