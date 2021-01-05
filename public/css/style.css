@@ -130,6 +130,16 @@ a {
 .chat-sidebar ul li {
 	padding: 10px 5px 10px;
 	border-top: 1px solid grey;
+	display: flex;
+	align-items: center;
+}
+
+.chat-sidebar ul li .username{
+	width: 100%;
+}
+
+.chat-sidebar ul li i{
+	font-size: x-large;
 }
 
 .chat-sidebar ul li:hover{
