@@ -2,7 +2,9 @@
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Azure.WebJobs.Extensions.SignalRService;
-using ChattingWebsite.Functions.Models;
+using Microsoft.AspNetCore.Http;
+using System;
+using ChattingWebsite.Functions.Helpers;
 
 namespace ChattingWebsite.Functions
 {
@@ -10,14 +12,16 @@ namespace ChattingWebsite.Functions
     {
         [FunctionName(nameof(SendToGroup))]
         public static Task Run(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "post")] Message message,
+        [HttpTrigger(AuthorizationLevel.Anonymous, "post")] HttpRequest req,
         [SignalR(HubName = "chatHub")] IAsyncCollector<SignalRMessage> signalRMessages)
         {
+            var message = RequestReader.GetChatMessageFromRequest(req);
             return signalRMessages.AddAsync(
                 new SignalRMessage
                 {
-                    GroupName = message.ToGroupName,
-                    Target = "newMessage",
+                    UserId = message.Recipient,
+                    GroupName = message.GroupName,
+                    Target = Environment.GetEnvironmentVariable("NewMessageEventName"),
                     Arguments = new[] { message }
                 }
             );

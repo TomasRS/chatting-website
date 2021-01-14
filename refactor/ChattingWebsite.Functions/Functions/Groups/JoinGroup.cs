@@ -4,6 +4,10 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Azure.WebJobs.Extensions.SignalRService;
 using ChattingWebsite.Functions.Models;
 using System;
+using Newtonsoft.Json;
+using System.IO;
+using ChattingWebsite.Functions.Helpers;
+using Microsoft.AspNetCore.Http;
 
 namespace ChattingWebsite.Functions
 {
@@ -11,42 +15,28 @@ namespace ChattingWebsite.Functions
     {
         [FunctionName(nameof(JoinGroup))]
         public static Task Run(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "post")] UserGroup userGroup,
+        [HttpTrigger(AuthorizationLevel.Anonymous, "post")] HttpRequest req,
         [SignalR(HubName = "chatHub")]
         IAsyncCollector<SignalRGroupAction> signalRGroupActions,
         IAsyncCollector<SignalRMessage> signalRMessages)
         {
-            //Joins a user to a group
-            signalRGroupActions.AddAsync(
-                new SignalRGroupAction
-                {
-                    ConnectionId = userGroup.User.ConnectionId,
-                    GroupName = userGroup.GroupName,
-                    Action = GroupAction.Add
-                });
+            var message = RequestReader.GetChatMessageFromRequest(req);
+            var decodedConnectionId = Base64Decoder.Decode(message.ConnectionId);
 
-            //Sends a message to the user to welcome them to the group
-            signalRMessages.AddAsync(
-                new SignalRMessage
-                {
-                    ConnectionId = userGroup.User.ConnectionId,
-                    Target = "newMessage",
-                    
-                });
+            GroupHelper.AddToGroup(signalRGroupActions, message, decodedConnectionId);
 
             //Sends a message to the group (except for the user) that a new user has joined
             return signalRMessages.AddAsync(
                 new SignalRMessage
                 {
-                    GroupName = userGroup.GroupName,
-                    Target = "newMessage",
+                    GroupName = message.GroupName,
+                    Target = Environment.GetEnvironmentVariable("NewMessageEventName"),
                     Arguments = new[] {
-                        new Message {
+                        new ChatMessage {
                             IsChatBot = true,
-                            UserName = "ChatBot",
-                            Content = $"{userGroup.User.Name} has joined the chat",
-                            Time = $"{DateTime.Now.TimeOfDay.Hours}:{DateTime.Now.TimeOfDay.Minutes}",
-                            ToGroupName = userGroup.GroupName
+                            Sender = "ChatBot",
+                            Text = $"{message.Sender} has joined the chat",
+                            Time = $"{DateTime.Now.TimeOfDay.Hours}:{DateTime.Now.TimeOfDay.Minutes}"
                         }
                     }
                 });
