@@ -1,0 +1,33 @@
+<div class="join-container">
+    <header class="join-header">
+        <h1>Welcome to WebChat</h1>
+    </header>
+</div>
+<hr>
+<main class="join-main">
+    <div class="login-form">
+        <div class="form-control">
+            <label for="username">Username</label>
+            <input
+            [(ngModel)]="username"
+            type="text"
+            name="username"
+            id="username"
+            placeholder="Username"
+            required />
+        </div>
+        <div class="form-control">
+            <label for="room">Room</label>
+            <select name="room" [(ngModel)]="room">
+                <option
+                *ngFor="let room of rooms"
+                [value]="room">{{room}}
+                </option>
+            </select>
+        </div>
+        <button
+        class="btn"
+        [routerLink]="['/rooms', room]"
+        (click)="joinRoom()">Join</button>
+    </div>
+</main>

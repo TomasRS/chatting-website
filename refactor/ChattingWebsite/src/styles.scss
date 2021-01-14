@@ -1,0 +1,61 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+:root {
+	--light-color: #e6e9ff;
+	--success-color: #5cb85c;
+	--error-color: #d9534f;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: 'Monserrat', sans-serif;
+	font-size: 16px;
+	background-image: linear-gradient(to right, #7221CE, #1264D4);
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+ul {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+}
+
+.btn {
+	cursor: pointer;
+	padding: 5px 15px;
+	margin: 0;
+	background-color: #c23ee1;
+    color: white;
+    font-weight: bold;
+	border: 0;
+	font-size: inherit;
+	opacity: 0.9;
+	transition: 0.3s;
+}
+
+.btn:hover{
+	opacity: 1;
+}
+
+
+/* Smartphones width */
+@media (max-width: 700px){
+	body{
+		font-size: small;
+	}
+
+	h1{
+		font-size: medium;
+	}
+}
