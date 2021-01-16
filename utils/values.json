@@ -4,7 +4,7 @@
     "roomUsersEventName": "roomUsers",
     "messageEventName": "message",
     "connectionEventName": "connection",
-    "disconnectEventName": "disconnect",
+    "disconnectEventName": "leaveRoom",
     "joinRoomEventName": "joinRoom",
     "chatMessageEventName": "chatMessage"
 }

@@ -1,0 +1,52 @@
+<div class="chat-container">
+    <header class="chat-header">
+      <h1 class="app-title"><i class="far fa-comment-dots"></i> WebChat</h1>
+      <div class="room-name-title">
+        <i class="fas fa-comments"></i>
+        <h2 class="room-name">{{room}}</h2>
+      </div>
+      <a class="btn leave-room" routerLink="" (click)="leaveRoom()"><i class="fas fa-chevron-circle-left"></i>Leave Room</a>
+    </header>
+    <main class="chat-main">
+      <div class="chat-sidebar">
+        <h3><i class="fas fa-users"></i> Users</h3>
+        <input class="search-users" type="text" placeholder="Search users">
+        <ul id="users">
+          <li *ngFor="let user of users">
+            <div class="username">{{user.name}}</div>
+            <i class="fas fa-user-circle"></i>
+          </li>
+        </ul>
+      </div>
+      <div class="mobile-room-name">
+        <i class="fas fa-comments"></i>
+        <div class="room-name"></div>
+      </div>
+      <div class="chat-messages" #chatWindow [scrollTop]="chatWindow.scrollHeight">
+        <div class="message"
+        *ngFor="let message of messages"
+        [ngClass]="(message.isChatBot || message.username !== myUsername)? 'other':'me'">
+        <p class="meta" [ngClass]="(message.isChatBot)? 'from-chatbot':''">
+          {{message.username}}
+          <span> - {{message.time}}</span>
+        </p>
+        <p class="text" [ngClass]="(message.isChatBot)? 'from-chatbot':''">
+          {{message.text}}
+        </p>
+        </div>
+      </div>
+    </main>
+    <div class="chat-form-container">
+      <form id="chat-form">
+        <input
+        [(ngModel)]="messageContent"
+        name="message"
+        id="msg"
+        type="text"
+        placeholder="Enter Message"
+        required
+        autocomplete="off" />
+        <button class="btn" (click)="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+      </form>
+    </div>
+  </div>
