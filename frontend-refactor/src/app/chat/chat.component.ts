@@ -50,14 +50,6 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     });
   }
 
-  public listenForBrowserRefresh(): void {
-    this.refreshSubscription = this.router.events.subscribe((event) => {
-      if (event instanceof NavigationStart){
-        this.leaveRoom();
-      }
-    });
-  }
-
   public sendMessage(): void {
     this.chatService.sendMessage(this.messageContent);
     this.messageContent = "";
@@ -70,15 +62,12 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   /* Initialization methods */
   private initializeRoom(): void {
     this.room = this.route.snapshot.paramMap.get('id') || "";
+    this.chatService.leaveRoom();
     this.chatService.joinRoom(this.room, this.myUsername);
   }
 
   private initializeUsername(): void {
     this.myUsername = localStorage.getItem(environment.localStorageUsernameKey) || "";
-
-    if(this.myUsername == ""){
-      // redirect user to login page
-    }
   }
 
   /* Methods for UI behavior */
