@@ -5,7 +5,7 @@ function formatMessage(username, text){
     return {
         username,
         text,
-        time: moment().format(values.timeFormat),
+        dateTime: moment().utc().format(values.dateTimeFormat),
         isChatBot: username === values.chatBotName
     }
 }

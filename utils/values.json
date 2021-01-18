@@ -1,6 +1,6 @@
 {
     "chatBotName": "Chat Bot",
-    "timeFormat": "h:mm a",
+    "dateTimeFormat": "YYYY-MM-DD HH:mm:ss",
     "roomUsersEventName": "roomUsers",
     "messageEventName": "message",
     "connectionEventName": "connection",
