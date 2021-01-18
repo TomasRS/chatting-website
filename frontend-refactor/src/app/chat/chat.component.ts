@@ -15,6 +15,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   @ViewChild('chatWindow') private chatWindow: ElementRef;
   myUsername: string; 
   room: string;
+  searchTerm: string;
   users: Array<User> = [];
   messageContent: string;
   messages: Array<ChatMessage> = [];
