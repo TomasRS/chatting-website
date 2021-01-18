@@ -1,0 +1,72 @@
+name: CI/CD to Azure
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+    
+env:
+  AZURE_WEBAPP_PACKAGE_PATH: './backend'      # set this to the path to your web app project, defaults to the repository root
+  NODE_VERSION: '14.x'                        # set this to the node version to use
+
+jobs:
+  # Builds & Deploys the angular webapp to Azure:
+  build-angular-webapp:
+    name: Build & Deploy Angular App
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: npm install and npm run build
+        working-directory: ./frontend
+        run: |
+          npm i
+          npm run build --prod
+      
+      - name: 'Deploy to Azure Static Website'   
+        uses: tibor19/static-website-deploy@v1
+        with:
+          enabled-static-website: 'true'
+          folder: './frontend/dist/webapp'
+          remove-existing-files: 'true'
+          connection-string: ${{ secrets.WEBCHAT_STACC_CONNECTION_STRING }}
+  
+  # Builds & Deploys the node.js app to Azure:
+  build-and-deploy-nodejs:
+    name: Build & Deploy Node.js App
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ env.NODE_VERSION }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+    - name: npm install, build, and test
+      run: |
+        # Build and test the project, then
+        # deploy to Azure Web App.
+        npm install
+        npm run build --if-present
+        npm run test --if-present
+    - name: 'Deploy to Azure WebApp'
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
