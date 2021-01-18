@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, AfterViewChecked } from '@angular/core';
 import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -11,8 +11,8 @@ import { ChatService } from '../services/chat/chat.service';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit {
-  @ViewChild('chatWindow') chatWindow: ElementRef;
+export class ChatComponent implements OnInit, AfterViewChecked {
+  @ViewChild('chatWindow') private chatWindow: ElementRef;
   myUsername: string; 
   room: string;
   users: Array<User> = [];
@@ -31,6 +31,10 @@ export class ChatComponent implements OnInit {
     this.initializeRoom();
     this.listenForMessages();
     this.listenForUsersRoomList();
+  }
+
+  ngAfterViewChecked(): void {
+    this.scrollChatWindowToBottom();
   }
 
   public listenForMessages(): void {
@@ -74,5 +78,13 @@ export class ChatComponent implements OnInit {
     if(this.myUsername == ""){
       // redirect user to login page
     }
+  }
+
+  /* Methods for UI behavior */
+  private scrollChatWindowToBottom(): void {
+    try {
+      this.chatWindow.nativeElement.scrollTop = this.chatWindow.nativeElement.scrollHeight;
+    }
+    catch(err) { } 
   }
 }
