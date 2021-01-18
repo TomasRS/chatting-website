@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   serverUrl: "http://localhost:3000",
+  timeFormat: "h:mm a",
   localStorageUsernameKey: "webchat-username",
   roomNames: [ "General", "Games", "College" ],
   roomUsersEventName: "roomUsers",

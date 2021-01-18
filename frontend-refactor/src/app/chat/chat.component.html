@@ -28,7 +28,7 @@
         [ngClass]="(message.isChatBot || message.username !== myUsername)? 'other':'me'">
         <p class="meta" [ngClass]="(message.isChatBot)? 'from-chatbot':''">
           {{message.username}}
-          <span> - {{message.time}}</span>
+          <span> - {{message.dateTime}}</span>
         </p>
         <p class="text" [ngClass]="(message.isChatBot)? 'from-chatbot':''">
           {{message.text}}

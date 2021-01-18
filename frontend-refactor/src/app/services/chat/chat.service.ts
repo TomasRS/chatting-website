@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from "src/environments/environment";
 import { ChatMessage } from "src/app/models/chat-message.model";
 import { RoomUsers } from "src/app/models/room-users.model";
+import * as moment from "moment";
 
 @Injectable()
 
@@ -27,6 +28,7 @@ export class ChatService{
     public messageReceived(): Observable<ChatMessage> {
         let observable = new Observable<ChatMessage>(observer => {
             this.socket.on(environment.messageEventName, (data: ChatMessage) => {
+                data = this.convertToLocalTime(data);
                 observer.next(data);
             });
 
@@ -47,5 +49,11 @@ export class ChatService{
         })
 
         return observable;
+    }
+
+    private convertToLocalTime(message: ChatMessage): ChatMessage {
+        let utc = moment.utc(message.dateTime).toDate();
+        message.dateTime = moment(utc).local().format(environment.timeFormat);
+        return message;
     }
 }

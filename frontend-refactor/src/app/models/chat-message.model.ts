@@ -1,6 +1,6 @@
 export class ChatMessage{
   username: string;
   text: string;
-  time: string;
+  dateTime: string;
   isChatBot: boolean;
   }
