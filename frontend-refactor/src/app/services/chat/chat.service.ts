@@ -31,11 +31,6 @@ export class ChatService{
                 data = this.convertToLocalTime(data);
                 observer.next(data);
             });
-
-            // If there's an error, disconnect socket
-            // return () => {
-            //     this.socket.disconnect();
-            // }
         });
 
         return observable;
