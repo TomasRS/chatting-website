@@ -8,12 +8,36 @@ on:
     
 env:
   AZURE_WEBAPP_PACKAGE_PATH: './backend'      # set this to the path to your web app project, defaults to the repository root
-  NODE_VERSION: '14.x'                        # set this to the node version to use
+  NODE_VERSION: '10.x'                        # set this to the node version to use
 
 jobs:
+  # Builds & Deploys the node.js app to Azure:
+  build-and-deploy-nodejs:
+    name: Build & Deploy Node.js App
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ env.NODE_VERSION }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+    - name: npm install, build, and test
+      run: |
+        cd backend
+        npm install
+        npm run build --if-present
+        npm run test --if-present
+    - name: 'Deploy to Azure WebApp'
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+ 
   # Builds & Deploys the angular webapp to Azure:
   build-angular-webapp:
     name: Build & Deploy Angular App
+    needs: build-and-deploy-nodejs
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -46,27 +70,3 @@ jobs:
           folder: './frontend/dist/webapp'
           remove-existing-files: 'true'
           connection-string: ${{ secrets.WEBCHAT_STACC_CONNECTION_STRING }}
-  
-  # Builds & Deploys the node.js app to Azure:
-  build-and-deploy-nodejs:
-    name: Build & Deploy Node.js App
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ env.NODE_VERSION }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ env.NODE_VERSION }}
-    - name: npm install, build, and test
-      run: |
-        # Build and test the project, then
-        # deploy to Azure Web App.
-        npm install
-        npm run build --if-present
-        npm run test --if-present
-    - name: 'Deploy to Azure WebApp'
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
