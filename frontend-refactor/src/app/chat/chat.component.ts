@@ -31,7 +31,6 @@ export class ChatComponent implements OnInit {
     this.initializeRoom();
     this.listenForMessages();
     this.listenForUsersRoomList();
-    this.listenForBrowserRefresh();
   }
 
   public listenForMessages(): void {
