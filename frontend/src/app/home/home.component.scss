@@ -60,6 +60,22 @@
 	height: 40px;
 }
 
+.disclaimer{
+	color: #000000;
+	text-align: center;
+	padding: 1rem;
+	background-color: #f5c62f;
+	position: fixed;
+	width: 100%;
+	left: 0;
+	bottom: 0;
+}
+
+.disclaimer i{
+	margin-left: .5rem;
+	margin-right: .5rem;
+}
+
 /* Smartphones width */
 @media (max-width: 700px){ 
     .join-main .form-control input[type='text']{
@@ -72,5 +88,9 @@
 
 	.join-main .btn{
 		height: 30px;
+	}
+
+	.disclaimer .mobile-icon-disclaimer{
+		display: none;
 	}
 }
