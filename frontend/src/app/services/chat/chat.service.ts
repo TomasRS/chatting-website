@@ -47,7 +47,7 @@ export class ChatService{
     }
 
     private convertToLocalTime(message: ChatMessage): ChatMessage {
-        let utc = moment.utc(message.dateTime).toDate();
+        let utc = moment.utc(message.dateTime);
         message.dateTime = moment(utc).local().format(environment.timeFormat);
         return message;
     }
