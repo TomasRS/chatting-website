@@ -61,7 +61,8 @@ jobs:
         working-directory: ./frontend
         run: |
           npm i
-          npm run build --prod
+          npm install -g @angular/cli > /dev/null
+          ng build --prod
       
       - name: 'Deploy to Azure Static Website'   
         uses: tibor19/static-website-deploy@v1
