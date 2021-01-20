@@ -18,7 +18,7 @@
         </div>
         <div class="form-control">
             <label for="room">Room</label>
-            <select name="room" [(ngModel)]="room">
+            <select name="room" id="room" [(ngModel)]="room">
                 <option
                 *ngFor="let room of rooms"
                 [value]="room">{{room}}
