@@ -10,13 +10,15 @@ import { HomeComponent } from './home/home.component';
 import { ChatComponent } from './chat/chat.component';
 import { ChatService } from './services/chat/chat.service';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FooterComponent,
     HomeComponent,
-    ChatComponent
+    ChatComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
